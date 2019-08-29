@@ -469,7 +469,8 @@ ifdef builtin-target
 # scripts/link-vmlinux.sh builds an aggregate built-in.a with a symbol
 # table and index.
 quiet_cmd_ar_builtin = AR      $@
-      cmd_ar_builtin = rm -f $@; \
+      cmd_ar_builtin = $(update_lto_symversions) \
+		     rm -f $@; \
                      $(AR) rcSTP$(KBUILD_ARFLAGS) $@ $(filter $(real-obj-y), $^)
 
 $(builtin-target): $(real-obj-y) FORCE
